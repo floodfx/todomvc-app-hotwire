@@ -1,0 +1,5 @@
+<section class="main" style="display: block;">   
+  <turbo-frame id="todos" src="/todos"></turbo-frame>
+
+  <turbo-frame id="todoStats" src="/todoStats"></turbo-frame>   
+</section>

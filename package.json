@@ -1,7 +1,24 @@
 {
   "private": true,
+  "scripts": {
+    "server-dev": "nodemon src/server/index.ts",
+    "client-build": "parcel build src/client/contollers/index.ts; parcel build public/main.css",
+    "clean": "rm -rf dist"
+  },
   "dependencies": {
+    "@hotwired/turbo": "^7.0.0-beta.4",
+    "eta": "^1.12.1",
+    "express": "^4.17.1",
+    "stimulus": "^2.0.0",
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.40",
+    "nodemon": "^2.0.7",
+    "parcel-bundler": "^1.12.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
   }
 }

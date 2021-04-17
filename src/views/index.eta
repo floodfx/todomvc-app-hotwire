@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Hotwire • TodoMVC</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script src="index.js" async></script>  
+</head>
+
+<body>
+  <section class="todoapp" data-controller="todos">
+
+    <%~ includeFile('./header', it) %>
+
+    
+    <%~ includeFile('./main', it) %>
+    
+  </section>
+  
+  <footer class="info">
+    <p>Double-click to edit a todo</p>
+    <p>Written by <a href="https://github.com/floodfx">Donnie Flood</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+  </footer>
+</body>

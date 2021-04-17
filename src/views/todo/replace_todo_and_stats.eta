@@ -1,0 +1,2 @@
+<%~ includeFile('./replace_todo.eta', {...it, dom_target: it.replace_todo_dom_target}) %>
+<%~ includeFile('../todos/replace_stats.eta', {...it, dom_target: it.replace_stats_dom_target}) %>

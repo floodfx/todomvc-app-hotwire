@@ -1,0 +1,2 @@
+<turbo-stream action="remove" target="<%= it.dom_target %>">
+</turbo-stream>

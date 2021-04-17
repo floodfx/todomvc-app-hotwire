@@ -1,0 +1,14 @@
+<turbo-frame id="todos">
+
+  <%/* Mark All Component */%>
+  <input class="toggle-all" id="toggle-all" type="checkbox">
+  <label for="toggle-all">Mark all as complete</label>
+    
+  <%/* List of Todos */%>
+  <ul class="todo-list" id="todos_list">    
+    <% it.todos.forEach(function(todo){ %>
+      <%~ includeFile('./todo/todo', todo) %>
+    <% }) %>
+  </ul>
+
+</turbo-frame>

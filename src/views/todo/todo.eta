@@ -1,0 +1,28 @@
+<% 
+/* Todo Template
+ */ 
+%>
+<li id="todo_<%= it.id %>" 
+	data-controller="todo"
+	data-todo-id-value="<%= it.id %>"
+	data-todo-title-value="<%= it.title %>"
+	data-todo-completed-value="<%= it.completed %>"
+	data-todo-completed-class="completed"
+	class="<%= it.completed ? 'completed' : '' %>"
+	data-todo-editing-class="editing"
+	data-todos-target="todo"
+	>
+	<div class="view">
+		
+		<input class="toggle" type="checkbox" <%= it.completed ? 'checked' : '' %> data-action="todo#toggle">
+		
+		<label data-action="dblclick->todo#edit"><%= it.title %></label>
+
+		<form method="delete" action="/todo/<%= it.id %>">
+			<button class="destroy" type="submit"></button>
+		</form>
+	</div>
+	<form action="/todo/<%= it.id %>" method="PATCH">
+		<input class="edit" name="title" value="<%= it.title %>">
+	</form>
+</li>
