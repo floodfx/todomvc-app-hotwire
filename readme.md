@@ -1,7 +1,7 @@
 # Hotwire • [TodoMVC](http://todomvc.com)
 
 ## Intro
-Hi there. I wanted to learn more about [Hotwire.dev] so I build this.  It is my first [Hotwire.dev]-based app so would love any feedback.  It is also my first [TodoMVC](http://todomvc.com) app.  :) It seemed like a small but not-too-small thing to try out...  Hope you learn something.
+Hi there. I wanted to learn more about [Hotwire.dev](https://hotwire.dev) so I build this.  It is my first [Hotwire.dev](https://hotwire.dev)-based app so would love any feedback.  It is also my first [TodoMVC](http://todomvc.com) app.  :) It seemed like a small but not-too-small thing to try out...  Hope you learn something.
 
 ## What is Hotwire?
 
@@ -9,7 +9,7 @@ Hi there. I wanted to learn more about [Hotwire.dev] so I build this.  It is my 
 
 ## Resources
 
-* [Hotwire.dev](Hotwire.dev)
+* [Hotwire.dev](https://hotwire.dev)
   * [Turbo](https://turbo.hotwire.dev/)
   * [Stimulus](https://stimulus.hotwire.dev/)
 
