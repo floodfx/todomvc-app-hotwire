@@ -1,6 +1,9 @@
 import { Controller } from 'stimulus'
 
+// Stimulus Controller containing all the Todos 
 export default class TodosController extends Controller {
+  // declarations of the target elements and existing properties
+  // to satisfy Typescript compiler
   todoFormTarget: HTMLFormElement
   todoInputTarget: HTMLInputElement
   todoTargets: Element[]
@@ -22,6 +25,7 @@ export default class TodosController extends Controller {
     "completedFilter"
   ]
 
+  // declarations for values for Typescript
   remainingCountValue: number
   hasRemainingCountValue: boolean
 
@@ -33,6 +37,7 @@ export default class TodosController extends Controller {
     filter: String
   }
 
+  // called when Enter key pressed on title input
   clearOnEnter(event: KeyboardEvent) {
     if (event.key === "Enter") {
       const inputValue = this.todoInputTarget.value.trim();
@@ -40,9 +45,11 @@ export default class TodosController extends Controller {
         // don't submit if input empty
         event.preventDefault();
       } else {
+        // tell server to create a new Todo
         fetch(`/todo`, {
           method: "POST",
           headers: {
+            // tell server we accept turbo-stream responses
             Accept: "text/vnd.turbo-stream.html"
           },
           body: new URLSearchParams({
@@ -52,10 +59,12 @@ export default class TodosController extends Controller {
           .then(response => response.text())
           .then(html => {
             // add div to body to load turbo-stream response
-            // TODO better way?
+            // TODO better way to do this?
             const d = document.createElement("div");
             d.innerHTML = html
             document.body.append(d)
+
+            // update other controller targets / values
             this.todoInputTarget.value = "";
             this.footerTarget.classList.remove("hidden");
             this.remainingCountValue = this.remainingCountValue + 1;
@@ -65,23 +74,27 @@ export default class TodosController extends Controller {
     }
   }
 
+  // called when clear completed button pressed
   clearCompleted(event: Event) {
     event.preventDefault();
 
+    // find the completed Todos in the DOM
     this.todoTargets.forEach((t, i) => {
       let completed = t.getAttribute('data-todo-completed-value') === 'true'
       if (completed) {
         let id = t.getAttribute('data-todo-id-value')
+        // tell server to delete this Todo
         fetch(`/todo/${id}`, {
           method: "DELETE",
           headers: {
+            // tell server we accept turbo-stream responses
             Accept: "text/vnd.turbo-stream.html"
           }
         })
           .then(response => response.text())
           .then(html => {
             // add div to body to load turbo-stream response
-            // TODO better way?
+            // TODO better way to do this?
             const d = document.createElement("div");
             d.innerHTML = html
             document.body.append(d)
@@ -91,6 +104,8 @@ export default class TodosController extends Controller {
     this.countRemaining();
   }
 
+  // counts the non-completed Todos and updates the remainingCountValue
+  // which kicks off the remainingCountValueChanged lifecycle method
   countRemaining() {
     var count = 0;
     this.todoTargets.forEach((t, i) => {
@@ -102,6 +117,7 @@ export default class TodosController extends Controller {
     this.remainingCountValue = count;
   }
 
+  // make all Todos visiable
   showAll(event: Event) {
     event.preventDefault();
     this.todoTargets.forEach((t, i) => {
@@ -110,6 +126,7 @@ export default class TodosController extends Controller {
     this.filterValue = "all";
   }
 
+  // only show non-completed Todos
   showActive(event: Event) {
     event.preventDefault();
     this.todoTargets.forEach((t, i) => {
@@ -123,6 +140,7 @@ export default class TodosController extends Controller {
     this.filterValue = "active";
   }
 
+  // only show completed Todos
   showCompleted(event: Event) {
     event.preventDefault();
     this.todoTargets.forEach((t, i) => {
@@ -136,6 +154,7 @@ export default class TodosController extends Controller {
     this.filterValue = "completed";
   }
 
+  // automatically called by Stimulus when remainingCountValue is updated
   remainingCountValueChanged() {
     const count = this.remainingCountValue;
     if (this.hasRemainingCountTarget) {
@@ -144,6 +163,7 @@ export default class TodosController extends Controller {
       } else {
         this.footerTarget.classList.add("hidden");
       }
+      // update the remainingCount element
       this.remainingCountTarget.innerHTML = `
         <strong>${count}</strong> item${count === 1 ? '' : 's'} left
       `
@@ -151,7 +171,9 @@ export default class TodosController extends Controller {
 
   }
 
+  // automatically called by Stimulus when filterValue is updated
   filterValueChanged() {
+    // mark the targets with css as approproiate
     if (this.filterValue === "all") {
       this.allFilterTarget.classList.add("selected");
       this.activeFilterTarget.classList.remove("selected");
