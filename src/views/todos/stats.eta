@@ -2,12 +2,15 @@
   <%/* Stats and Filters */%>
   <footer id="todoStatsFooter" class="footer <%= it.showStats ? '' : 'hidden' %>"  
   data-todos-target="footer">
-    <span class="todo-count" data-todos-target="remainingCount" data-todos-remaining-count-value="<%= it.remainingCount %>">
+    <span class="todo-count" 
+      data-todos-target="remainingCount" 
+      data-todos-remaining-count-value="<%= it.remainingCount %>"
+    >
       <strong><%= it.remainingCount %></strong> item<%=it.remainingCount === 1 ? '' : 's'%> left
     </span>
     <ul class="filters" data-todos-filter-value="<%= it.filter ? 'all' : it.filter %>">
       <li>
-        <a href="#/" data-todos-target="allFilter" data-action="todos#showAll">All</a>
+        <a href="#/" class="selected" data-todos-target="allFilter" data-action="todos#showAll">All</a>
       </li>
       <li>
         <a href="#/active" data-todos-target="activeFilter" data-action="todos#showActive">Active</a>

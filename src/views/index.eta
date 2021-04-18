@@ -9,7 +9,9 @@
 </head>
 
 <body>
-  <section class="todoapp" data-controller="todos">
+  <section class="todoapp" 
+    data-controller="todos" 
+    data-action="todoCompletedToggled->todos#updateRemainingCount">
 
     <%~ includeFile('./header', it) %>
 
