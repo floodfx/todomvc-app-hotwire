@@ -7,14 +7,19 @@
 	data-todo-id-value="<%= it.id %>"
 	data-todo-title-value="<%= it.title %>"
 	data-todo-completed-value="<%= it.completed %>"
-	data-todo-completed-class="completed"
-	class="<%= it.completed ? 'completed' : '' %>"
+	data-todo-completed-class="completed"	
 	data-todo-editing-class="editing"
 	data-todos-target="todo"
+	data-action="todosToggleAll->todo#toggleFromParent"
+	class="<%= it.completed ? 'completed' : '' %>"
 	>
 	<div class="view">
 		
-		<input class="toggle" type="checkbox" <%= it.completed ? 'checked' : '' %> data-action="todo#toggle">
+		<input class="toggle" type="checkbox" 			
+			data-action="todo#toggle"
+			data-todo-target="completed"
+			<%= it.completed ? 'checked' : '' %>
+		>
 		
 		<label data-action="dblclick->todo#edit"><%= it.title %></label>
 

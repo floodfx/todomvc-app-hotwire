@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus'
+import { TodoCompletedToggledEvent } from '../todo'
 
 // Stimulus Controller containing all the Todos 
 export default class TodosController extends Controller {
@@ -13,6 +14,7 @@ export default class TodosController extends Controller {
   allFilterTarget: Element
   activeFilterTarget: Element
   completedFilterTarget: Element
+  toggleAllTarget: HTMLInputElement
 
   static targets = [
     "todoInput",
@@ -22,7 +24,8 @@ export default class TodosController extends Controller {
     "remainingCount",
     "allFilter",
     "activeFilter",
-    "completedFilter"
+    "completedFilter",
+    "toggleAll"
   ]
 
   // declarations for values for Typescript
@@ -72,6 +75,16 @@ export default class TodosController extends Controller {
 
       }
     }
+  }
+
+  toggleAll() {
+    const completed = this.toggleAllTarget.checked;
+
+    // dispatch event to toggle all Todo children elements to match
+    // completed value
+    this.todoTargets.forEach((t, i) => {
+      t.dispatchEvent(new TodosToggleAllEvent(completed))
+    })
   }
 
   // called when clear completed button pressed
@@ -189,4 +202,23 @@ export default class TodosController extends Controller {
     }
   }
 
+  updateRemainingCount(event: TodoCompletedToggledEvent) {
+    if (event.detail.completed) {
+      this.remainingCountValue = this.remainingCountValue - 1;
+    } else {
+      this.remainingCountValue = this.remainingCountValue + 1;
+    }
+  }
+
+}
+
+export class TodosToggleAllEvent extends CustomEvent<{ completed: boolean }> {
+  constructor(completed: boolean) {
+    super("todosToggleAll", {
+      detail: {
+        completed
+      },
+      bubbles: false // no need to bubble up since this is dispatched to children
+    })
+  }
 }

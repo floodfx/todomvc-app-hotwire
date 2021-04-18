@@ -1,7 +1,7 @@
 <turbo-frame id="todos">
 
   <%/* Mark All Component */%>
-  <input class="toggle-all" id="toggle-all" type="checkbox">
+  <input class="toggle-all" id="toggle-all" type="checkbox" data-todos-target="toggleAll" data-action="todos#toggleAll">
   <label for="toggle-all">Mark all as complete</label>
     
   <%/* List of Todos */%>
